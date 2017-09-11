@@ -1,43 +1,19 @@
 import cv2  # OpenCV Library
-from random import randint
-import numpy as np
-from PIL import Image
-#-----------------------------------------------------------------------------
-#       Load and configure Haar Cascade Classifiers
-#-----------------------------------------------------------------------------
- 
-# location of OpenCV Haar Cascade Classifiers:
-baseCascadePath = "/usr/local/share/OpenCV/haarcascades/"
- 
-# xml files describing our haar cascade classifiers
-faceCascadeFilePath = baseCascadePath + "haarcascade_frontalface_default.xml"
-noseCascadeFilePath = baseCascadePath + "haarcascade_mcs_nose.xml"
- 
-# build our cv2 Cascade Classifiers
-faceCascade = cv2.CascadeClassifier(faceCascadeFilePath)
-noseCascade = cv2.CascadeClassifier(noseCascadeFilePath)
 
- 
-#-----------------------------------------------------------------------------
-#       Main program loop
-#-----------------------------------------------------------------------------
- 
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(0)
- 
+font = cv2.FONT_HERSHEY_SIMPLEX
+
 while True:
     # Capture video feed
     ret, frame = video_capture.read()
- 
-    # Create greyscale image from the video feed
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    im_back = Image.fromarray(gray)
-    im_back.save('../out_data/camera_shot.jpg')
-    # Detect faces in input video stream
+
      
    # Iterate over each face found
-    box = cv2.rectangle(frame,(10,10),(100,80),(255,0,0),2)
- 
+    box = cv2.rectangle(frame,(10,10),(400,80),(255,0,0),2)
+
+    cv2.putText(frame,'Hello World!',(10,20), font, 1,(255,255,0),2)
+
  
     # Display the resulting frame
     cv2.imshow('Video', frame)
